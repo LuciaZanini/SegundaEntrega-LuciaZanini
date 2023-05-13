@@ -97,8 +97,6 @@ form input[type="submit"]:hover {
     background-color: #FF80AB;
 }
 
-/* Additional CSS for the products */
-
 .product-container {
     display: flex;
     justify-content: center;
@@ -143,7 +141,6 @@ form input[type="submit"]:hover {
     background-color: #ff80ab;
 }
 
-
 form {
     max-width: 500px;
     margin: 0 auto;
@@ -152,7 +149,6 @@ form {
     border-radius: 5px;
     box-shadow
 }
-
 
 footer {
     padding: 10px;
