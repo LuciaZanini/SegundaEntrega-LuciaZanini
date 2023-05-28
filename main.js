@@ -1,58 +1,82 @@
-// Arrays y Objetos
-
+// Defino arrays y productos
 let mates = [
     { nombre: "Zeus", precio: 2000 },
     { nombre: "Atenas", precio: 1500 },
     { nombre: "Arquimedes", precio: 1300 }
-];
-
-// Declaro carrito de compras (array vacio)
-let carrito = [];
-
-// Función para agregar un producto al carrito (recibe un producto como parametro y lo agrega al arreglo vacio utilizando push)
-function agregarAlCarrito(producto) {
+  ];
+  
+  let carrito = [];
+  
+  // Función para agregar un producto al carrito
+  function agregarAlCarrito(producto) {
     carrito.push(producto);
     console.log("Producto agregado al carrito: " + producto.nombre);
-}
-
-// Función para calcular el total de la compra. Recorre el array carrito y suma los precios de los productos para llegar al total.
-function calcularTotal() {
+    mostrarCarrito();
+  }
+  
+  // Función para mostrar los productos en el carrito
+  function mostrarCarrito() {
+    const carritoContainer = document.querySelector('#carrito');
+    carritoContainer.innerHTML = ""; // Limpio el contenido del carrito antes de mostrar los productos
+  
+    carrito.forEach((producto) => {
+      const productoElement = document.createElement('div');
+      productoElement.textContent = producto.nombre + " ($" + producto.precio + ")";
+      carritoContainer.appendChild(productoElement);
+    });
+  
+    const totalCompraElement = document.querySelector('#total-compra');
+    if (totalCompraElement) {
+      totalCompraElement.textContent = calcularTotal();
+    }
+  }
+  
+  // Función para calcular el total de la compra
+  function calcularTotal() {
     let total = 0;
-    for (let i = 0; i < carrito.length; i++) {
-        total += carrito[i].precio;
+    carrito.forEach((producto) => {
+      total += producto.precio;
+    });
+    return "$" + total;
+  }
+  
+  // Función para vaciar el carrito
+  function vaciarCarrito() {
+    carrito = []; // Vacio el arreglo del carrito
+    mostrarCarrito(); // Actualizo el carrito
+  }
+  
+  // Para recuperar el carrito almacenado en localStorage
+  const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
+  
+  carrito = carritoGuardado; // Restaura el carrito desde localStorage
+  mostrarCarrito(); // y muestra los productos en el carrito
+  
+  // Selecciono el formulario de contacto en el HTML
+  const form = document.querySelector('#contact form');
+  
+  // Agrego un Event Listener para capturar la tecla Enter
+  form.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault(); // con esto evito que el form se envie de forma automatica 
+      enviarMensaje(); // Llamo a una función para enviar el mensaje
     }
-    return total;
-}
+  });
+  
+  // Guardo el carrito en localStorage al cerrar la página
+  window.addEventListener('beforeunload', () => {
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+  });
+  
+ // Creo elemento con DOM
+const nuevoElemento = document.createElement('p');
+nuevoElemento.textContent = '2023 Your Best Mate. All rights reserved.';
 
-// Mensaje de bienvenida
-alert("Bienvenidx a Your Best Mate. Vamos a armar tu carrito de compras.");
+// Aplico estilos 
+nuevoElemento.style.textAlign = 'center';  // para centrar  el texto
+nuevoElemento.style.fontSize = '16px';     // cambio el tamaño de fuente
+nuevoElemento.style.color = 'black';        // cambio el color del texto
 
-// Interaccion con el usuario mediante prompt() para que ingrese los productos que desea agregar al carrito
-let cantidadProductos = parseInt(prompt("Ingresa la cantidad de productos que deseas agregar al carrito:"));
+document.body.appendChild(nuevoElemento);
 
-// Funcion para validar que la cantidad ingresada sea un número válido
-if (isNaN(cantidadProductos) || cantidadProductos <= 0) {
-    alert("La cantidad ingresada no es válida. Inténtalo nuevamente.");
-} else {
-    // Bucle for, solicito el nombre del producto que se agregará al carrito. 
-    for (let i = 0; i < cantidadProductos; i++) {
-        // Entonces declaro variable y uso prompt() para obtener el nombre y se almacena en la variable nombreProducto.
-        let nombreProducto = prompt("Ingresa el nombre del producto #" + (i + 1) + ":");
-
-        // Utilizo el find() en el arreglo mates para buscar el producto ingresado por el usuario. 
-        let productoSeleccionado = mates.find(producto => producto.nombre === nombreProducto);
-
-        // Validar si se encontró el producto
-        if (productoSeleccionado) {
-            agregarAlCarrito(productoSeleccionado);
-            alert("Producto agregado al carrito: " + productoSeleccionado.nombre);
-        } else {
-            alert("El producto ingresado no está disponible. Inténtalo nuevamente.");
-            i--; // Resto 1 al contador para repetir el ciclo
-        }
-    }
-
-    // Calcular y mostrar al usuario el total de la compra
-    let totalCompra = calcularTotal();
-    alert("Total de la compra: $" + totalCompra);
-}
+  
