@@ -1,82 +1,97 @@
-// Defino arrays y productos
-let mates = [
-    { nombre: "Zeus", precio: 2000 },
-    { nombre: "Atenas", precio: 1500 },
-    { nombre: "Arquimedes", precio: 1300 }
-  ];
+document.addEventListener('DOMContentLoaded', function() {
+    const productData = [
+      { id: 1, name: 'Zeus', price: 2000, image: './images/1.jpg', description: 'Wooden mate' },
+      { id: 2, name: 'Atenas', price: 1500, image: './images/2.jpg', description: 'Pumpkin mate' },
+      { id: 3, name: 'Arquimedes', price: 1300, image: 'images/3.jpg', description: 'Smoky flavour' },
+      { id: 4, name: 'Hades', price: 1800, image: 'images/4.jpg', description: 'Strong base wooden mate' },
+      { id: 5, name: 'Poseidon', price: 1000, image: 'images/5.jpg', description: 'Basic but nice though' }
+    ];
   
-  let carrito = [];
+    let cart = [];
   
-  // Función para agregar un producto al carrito
-  function agregarAlCarrito(producto) {
-    carrito.push(producto);
-    console.log("Producto agregado al carrito: " + producto.nombre);
-    mostrarCarrito();
-  }
+    function renderProducts() {
+      const productList = document.getElementById('product-list');
+      productList.innerHTML = '';
   
-  // Función para mostrar los productos en el carrito
-  function mostrarCarrito() {
-    const carritoContainer = document.querySelector('#carrito');
-    carritoContainer.innerHTML = ""; // Limpio el contenido del carrito antes de mostrar los productos
+      productData.forEach(function(product) {
+        const item = document.createElement('li');
+        
+        const productImage = document.createElement('img');
+        productImage.src = product.image;
+        productImage.alt = product.name;
+        productImage.classList.add('small-image');
+
+        item.appendChild(productImage);
+        
+        const productName = document.createElement('h3');
+        productName.textContent = product.name;
+        item.appendChild(productName);
+        
+        const productDescription = document.createElement('p');
+        productDescription.textContent = product.description;
+        item.appendChild(productDescription);
+        
+        const productPrice = document.createElement('p');
+        productPrice.textContent = `$${product.price}`;
+        item.appendChild(productPrice);
+        
+        const button = document.createElement('button');
+        button.textContent = 'Add to cart';
+        button.addEventListener('click', function() {
+          addToCart(product);
+        });
+        item.appendChild(button);
+        
+        productList.appendChild(item);
+      });
+    }
   
-    carrito.forEach((producto) => {
-      const productoElement = document.createElement('div');
-      productoElement.textContent = producto.nombre + " ($" + producto.precio + ")";
-      carritoContainer.appendChild(productoElement);
+    function addToCart(product) {
+      cart.push(product);
+      updateCart();
+      saveCart();
+    }
+  
+    function updateCart() {
+      const cartList = document.getElementById('cart-list');
+      cartList.innerHTML = '';
+  
+      let total = 0;
+  
+      cart.forEach(function(product) {
+        const item = document.createElement('li');
+        item.textContent = `${product.name} - $${product.price}`;
+        cartList.appendChild(item);
+  
+        total += product.price;
+      });
+  
+      document.getElementById('cart-total').textContent = `$${total}`;
+    }
+  
+    function saveCart() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+  
+    function loadCart() {
+      const savedCart = localStorage.getItem('cart');
+      if (savedCart) {
+        cart = JSON.parse(savedCart);
+        updateCart();
+      }
+    }
+  
+    document.getElementById('clear-cart').addEventListener('click', function() {
+      clearCart();
     });
   
-    const totalCompraElement = document.querySelector('#total-compra');
-    if (totalCompraElement) {
-      totalCompraElement.textContent = calcularTotal();
+    function clearCart() {
+      cart = [];
+      updateCart();
+      saveCart();
     }
-  }
   
-  // Función para calcular el total de la compra
-  function calcularTotal() {
-    let total = 0;
-    carrito.forEach((producto) => {
-      total += producto.precio;
-    });
-    return "$" + total;
-  }
-  
-  // Función para vaciar el carrito
-  function vaciarCarrito() {
-    carrito = []; // Vacio el arreglo del carrito
-    mostrarCarrito(); // Actualizo el carrito
-  }
-  
-  // Para recuperar el carrito almacenado en localStorage
-  const carritoGuardado = JSON.parse(localStorage.getItem('carrito')) || [];
-  
-  carrito = carritoGuardado; // Restaura el carrito desde localStorage
-  mostrarCarrito(); // y muestra los productos en el carrito
-  
-  // Selecciono el formulario de contacto en el HTML
-  const form = document.querySelector('#contact form');
-  
-  // Agrego un Event Listener para capturar la tecla Enter
-  form.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault(); // con esto evito que el form se envie de forma automatica 
-      enviarMensaje(); // Llamo a una función para enviar el mensaje
-    }
+    renderProducts();
+    loadCart();
   });
-  
-  // Guardo el carrito en localStorage al cerrar la página
-  window.addEventListener('beforeunload', () => {
-    localStorage.setItem('carrito', JSON.stringify(carrito));
-  });
-  
- // Creo elemento con DOM
-const nuevoElemento = document.createElement('p');
-nuevoElemento.textContent = '2023 Your Best Mate. All rights reserved.';
-
-// Aplico estilos 
-nuevoElemento.style.textAlign = 'center';  // para centrar  el texto
-nuevoElemento.style.fontSize = '16px';     // cambio el tamaño de fuente
-nuevoElemento.style.color = 'black';        // cambio el color del texto
-
-document.body.appendChild(nuevoElemento);
-
   

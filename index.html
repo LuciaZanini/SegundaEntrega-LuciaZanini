@@ -36,70 +36,35 @@
     <section id="aboutus">
         <h2>Our Story</h2>
         <div class="about-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eu urna augue. Morbi eleifend venenatis
-                orci,
-                quis ultrices lorem ultricies non. Pellentesque euismod erat id mi facilisis commodo. Duis at augue
-                lobortis,
-                dignissim ligula et, feugiat arcu. Fusce id fermentum enim. Nullam nec dolor eu lectus dapibus posuere
-                vel
-                vitae mi. Sed sit amet justo vitae neque auctor sodales. Integer tincidunt quam in nulla facilisis
-                rhoncus.
-                Maecenas consectetur nisl a tortor porta, a euismod mi semper. Ut in tortor id nulla varius fringilla.
+            <p>Experience the traditional taste of mate with our Wooden Mate. Handcrafted from high-quality wood,
+                this mate gourd is perfect for enjoying your favorite mate blends. Its natural texture and unique
+                grains add a touch of elegance to your mate-drinking experience.
             </p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta corporis error quasi enim aperiam
-                harum fugiat obcaecati ipsum repellendus, cum repellat debitis vero quod ratione similique facilis
-                nostrum molestias.</p>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta corporis error quasi enim aperiam
-                harum fugiat obcaecati ipsum repellendus, cum repellat debitis vero quod ratione similique facilis
-                nostrum molestias.</p>
+            <p>Experience the harmonious blend of flavors with our Pumpkin Mate cured with mandarin and orange peel.
+                This mate gourd is expertly crafted from cured pumpkin, resulting in a unique taste profile. The
+                infusion of mandarin and orange peel adds a refreshing citrusy twist to the traditional mate,
+                creating a delightful and invigorating drinking experience.</p>
 
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, soluta corporis error quasi enim aperiam
-                harum fugiat obcaecati ipsum repellendus, cum repellat debitis vero quod ratione similique facilis
-                nostrum molestias.</p>
+            <p>Indulge in the rich and smoky flavors of our Whisky-Infused Mate. This unique mate gourd is crafted
+                from cured wood that has been infused with the essence of whisky. The result is a distinctive blend
+                of traditional mate and the enticing aroma of whisky, creating a truly exceptional drinking
+                experience.</p>
         </div>
     </section>
 
     <!-- Products section -->
     <section id="products">
         <h2 class="text-center">Our Products</h2>
-        <div class="product-container">
-            <div class="product-item">
-                <img src="./images/delicious-terere-drink-still-life.jpg" alt="Product 1">
-                <h3>Zeus</h3>
-                <p>Experience the traditional taste of mate with our Wooden Mate. Handcrafted from high-quality wood,
-                    this mate gourd is perfect for enjoying your favorite mate blends. Its natural texture and unique
-                    grains add a touch of elegance to your mate-drinking experience.</p>
-                <button class="btn" onclick="agregarAlCarrito(mates[0])">Add to Cart</button>
-            </div>
-            <div class="product-item">
-                <img src="./images/top-view-hands-holding-tea-mug.jpg" alt="Product 2">
-                <h3>Atenas</h3>
-                <p>Experience the harmonious blend of flavors with our Pumpkin Mate cured with mandarin and orange peel.
-                    This mate gourd is expertly crafted from cured pumpkin, resulting in a unique taste profile. The
-                    infusion of mandarin and orange peel adds a refreshing citrusy twist to the traditional mate,
-                    creating a delightful and invigorating drinking experience.</p>
-                <button class="btn" onclick="agregarAlCarrito(mates[1])">Add to Cart</button>
-            </div>
-            <div class="product-item">
-                <img src="./images/2.jpg" alt="Product 3">
-                <h3>Arquimedes</h3>
-                <p>Indulge in the rich and smoky flavors of our Whisky-Infused Mate. This unique mate gourd is crafted
-                    from cured wood that has been infused with the essence of whisky. The result is a distinctive blend
-                    of traditional mate and the enticing aroma of whisky, creating a truly exceptional drinking
-                    experience.</p>
-                <button class="btn" onclick="agregarAlCarrito(mates[2])">Add to Cart</button>
-            </div>
-        </div>
+        <div class="product-container" id="product-list"></div>
     </section>
 
-    <!-- Carrito container -->
-    <div id="carrito-container">
-        <h2>Shopping Cart</h2>
-        <div id="carrito"></div>
-        <p>Total: <span id="total-compra"></span></p>
-        <button onclick="vaciarCarrito()">Empty Cart</button>
-    </div>
 
+    <section id="cart">
+        <h2>Shopping Cart</h2>
+        <ul id="cart-list"></ul>
+        <p>Total: <span id="cart-total">$0</span></p>
+        <button id="clear-cart">Empty cart</button>
+    </section>
 
     <!-- Contact section -->
     <section id="contact">
@@ -120,12 +85,11 @@
 
 
     <footer>
-        
+        <p class="texto-footer">© 2023 Best Mate</p>
     </footer>
 
     <!--LINK TO JS-->
-    <script src="/main.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>
-
